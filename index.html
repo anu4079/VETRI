@@ -1,0 +1,482 @@
+<meta charset="utf-8">
+<title>Vetri Group 4</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Tamil:wght@500;700;800&family=Noto+Sans+Tamil:wght@400;600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: an exam-hall answer-sheet — ink on paper, OMR drop-out red for structure, bubbles for every choice */
+:root{
+  --paper:#f7f8fb; --sheet:#ffffff; --ink:#16213a; --muted:#5b6478; --line:#dfe3ec;
+  --omr:#c4214f; --omr-soft:#fbe8ee; --ok:#1b7f4b; --ok-soft:#e3f4ea; --bad:#b3261e; --bad-soft:#fbe6e4; --warn:#a15c00;
+  --f-display:"Anek Tamil","Noto Sans Tamil",system-ui,sans-serif;
+  --f-body:"Inter","Noto Sans Tamil",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0e1320; --sheet:#151c2c; --ink:#e7ebf4; --muted:#9aa3b8; --line:#283248;
+  --omr:#ff6b8f; --omr-soft:#3a1a26; --ok:#5fd394; --ok-soft:#173326; --bad:#ff8a80; --bad-soft:#3a1c1a; --warn:#f0b35a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0e1320; --sheet:#151c2c; --ink:#e7ebf4; --muted:#9aa3b8; --line:#283248;
+  --omr:#ff6b8f; --omr-soft:#3a1a26; --ok:#5fd394; --ok-soft:#173326; --bad:#ff8a80; --bad-soft:#3a1c1a; --warn:#f0b35a; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--sheet)}
+a{color:var(--omr)}
+button{font:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--omr);outline-offset:2px}
+.wrap{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--sheet);border-bottom:2px solid var(--omr)}
+.bar{display:flex;align-items:center;gap:12px;padding-block:10px;flex-wrap:wrap}
+.brand{font-family:var(--f-display);font-weight:800;font-size:20px;letter-spacing:.2px;display:flex;align-items:baseline;gap:8px;text-decoration:none;color:var(--ink)}
+.brand small{font-family:var(--f-mono);font-size:11px;color:var(--omr);font-weight:600;letter-spacing:.08em}
+nav.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin-left:auto}
+nav.tabs a{padding:7px 11px;border-radius:6px;text-decoration:none;color:var(--muted);font-weight:500;font-size:14px;white-space:nowrap}
+nav.tabs a.on{color:var(--omr);background:var(--omr-soft)}
+.lang{display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.lang button{border:0;background:transparent;color:var(--muted);padding:5px 9px;font-size:13px}
+.lang button.on{background:var(--ink);color:var(--sheet)}
+main{padding-block:22px 60px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.2;margin:0}
+h1{font-size:clamp(26px,5vw,38px);font-weight:800}
+h2{font-size:22px;font-weight:700}
+h3{font-size:17px;font-weight:700}
+.eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--omr);font-weight:600}
+.muted{color:var(--muted)}
+.stack{display:flex;flex-direction:column;gap:14px}
+.sheet{background:var(--sheet);border:1px solid var(--line);border-radius:10px;padding:18px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.grid > *{min-width:0}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--ink);background:var(--ink);color:var(--sheet);padding:9px 16px;border-radius:7px;font-weight:600;text-decoration:none;font-size:14px}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.red{background:var(--omr);border-color:var(--omr);color:#fff}
+.btn:disabled{opacity:.45;cursor:default}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+/* hero */
+.hero{display:grid;grid-template-columns:1.3fr 1fr;gap:18px;align-items:stretch}
+@media (max-width:720px){.hero{grid-template-columns:1fr}}
+.count{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px}
+.count div{border:1.5px solid var(--omr);border-radius:8px;padding:10px 6px;text-align:center}
+.count b{display:block;font-family:var(--f-mono);font-size:30px;color:var(--omr);font-variant-numeric:tabular-nums;line-height:1.1}
+.count span{font-size:12px;color:var(--muted)}
+.pattern{width:100%;border-collapse:collapse;font-size:14px}
+.pattern td,.pattern th{padding:7px 6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.pattern th{font-size:12px;color:var(--muted);font-weight:600}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.stat b{font-family:var(--f-mono);font-size:26px;display:block;font-variant-numeric:tabular-nums}
+/* meters */
+.meter{height:8px;border-radius:4px;background:var(--line);overflow:hidden}
+.meter i{display:block;height:100%;background:var(--omr)}
+.meter.ok i{background:var(--ok)}
+.unitrow{display:grid;grid-template-columns:minmax(0,1fr) 90px 52px;gap:10px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.unitrow:last-child{border-bottom:0}
+/* plan */
+.phase{border-left:3px solid var(--omr);padding-left:12px}
+.day{display:grid;grid-template-columns:28px 92px minmax(0,1fr);gap:10px;align-items:start;padding:10px 0;border-bottom:1px solid var(--line)}
+.day.today{background:var(--omr-soft);margin-inline:-10px;padding-inline:10px;border-radius:8px}
+.day.done .dtext{color:var(--muted);text-decoration:line-through}
+.bub{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--omr);background:transparent;display:inline-flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:12px;color:var(--omr);padding:0;flex:none}
+.bub.fill{background:var(--omr);color:#fff}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.chip{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:3px 9px;background:var(--sheet);color:var(--ink);text-decoration:none}
+a.chip:hover{border-color:var(--omr);color:var(--omr)}
+/* question */
+.qhead{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+.qno{font-family:var(--f-mono);font-weight:600;color:var(--omr)}
+.qtext{font-size:16px;white-space:pre-line}
+.qtext.ta{font-family:"Noto Sans Tamil",var(--f-body);font-size:15.5px}
+.qtext + .qtext{margin-top:6px;color:var(--muted)}
+.opts{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.opt{display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px;align-items:center;text-align:left;border:1.5px solid var(--line);background:var(--sheet);color:var(--ink);border-radius:9px;padding:9px 12px}
+.opt:hover:not(:disabled){border-color:var(--omr)}
+.opt .b{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--omr);display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-weight:600;color:var(--omr)}
+.opt.sel{border-color:var(--omr);background:var(--omr-soft)}
+.opt.sel .b{background:var(--omr);color:#fff}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.right .b{background:var(--ok);border-color:var(--ok);color:#fff}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt.wrong .b{background:var(--bad);border-color:var(--bad);color:#fff}
+.opt .t small{display:block;color:var(--muted);font-family:"Noto Sans Tamil",var(--f-body)}
+.explain{margin-top:12px;border-top:1px dashed var(--line);padding-top:10px;font-size:14px}
+.tag{font-size:12px;font-family:var(--f-mono);color:var(--muted)}
+.pill{font-size:12px;padding:2px 8px;border-radius:999px;font-weight:600}
+.pill.ok{background:var(--ok-soft);color:var(--ok)}
+.pill.bad{background:var(--bad-soft);color:var(--bad)}
+.pill.skip{background:var(--line);color:var(--muted)}
+/* test */
+.testbar{position:sticky;top:calc(env(safe-area-inset-top,0px) + 58px);z-index:4;background:var(--sheet);border:1px solid var(--line);border-radius:10px;padding:10px 14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.timer{font-family:var(--f-mono);font-size:22px;font-weight:600;font-variant-numeric:tabular-nums}
+.timer.low{color:var(--bad)}
+.omr{display:grid;grid-template-columns:repeat(auto-fill,minmax(34px,1fr));gap:5px}
+.omr button{border:1.5px solid var(--line);background:var(--sheet);color:var(--muted);border-radius:6px;padding:4px 0;font-family:var(--f-mono);font-size:12px}
+.omr button.ans{border-color:var(--omr);color:var(--omr);background:var(--omr-soft)}
+.omr button.cur{outline:2px solid var(--ink)}
+.omr button.r{border-color:var(--ok);background:var(--ok-soft);color:var(--ok)}
+.omr button.w{border-color:var(--bad);background:var(--bad-soft);color:var(--bad)}
+select,input[type=number]{font:inherit;padding:8px 10px;border:1.5px solid var(--line);border-radius:7px;background:var(--sheet);color:var(--ink);max-width:100%}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted);min-width:0}
+.score{font-family:var(--f-mono);font-size:44px;font-weight:600;color:var(--omr);line-height:1}
+details.unit{border-bottom:1px solid var(--line);padding:12px 0}
+details.unit summary{cursor:pointer;display:flex;justify-content:space-between;gap:10px;font-weight:600}
+details.unit summary::-webkit-details-marker{display:none}
+.toplist{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;margin-top:10px;font-size:14px}
+.books{width:100%;border-collapse:collapse;font-size:14px}
+.books th,.books td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.books th{font-size:12px;color:var(--muted)}
+.tbl{overflow-x:auto}
+.note{font-size:13px;color:var(--muted);border-left:3px solid var(--line);padding-left:10px}
+@media (max-width:720px){header.top{position:static}.testbar{top:env(safe-area-inset-top,0px)}nav.tabs{margin-left:0;width:100%;order:3}}
+@media (prefers-reduced-motion: no-preference){.opt{transition:background .12s,border-color .12s}}
+</style>
+
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="#home">வெற்றி Group 4 <small>CCSE-IV · 2027</small></a>
+    <nav class="tabs" id="tabs">
+      <a href="#home" data-r="home">முகப்பு</a>
+      <a href="#plan" data-r="plan">Study Plan</a>
+      <a href="#practice" data-r="practice">Practice</a>
+      <a href="#mock" data-r="mock">Mock Test</a>
+      <a href="#mistakes" data-r="mistakes">Mistakes</a>
+      <a href="#syllabus" data-r="syllabus">Syllabus</a>
+      <a href="#books" data-r="books">Books</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Question language">
+      <button id="lg-both" data-l="both">த+E</button><button id="lg-ta" data-l="ta">தமிழ்</button><button id="lg-en" data-l="en">EN</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" id="app"><p class="muted">Loading previous-year questions…</p></main>
+
+<script>
+(function(){
+"use strict";
+const EXAM = new Date("2027-01-10T09:30:00+05:30");
+const PLAN_START = "2026-11-19";
+const UNITS = [
+ ["PTA","பொதுத்தமிழ் (பகுதி அ)","General Tamil (Part A)"],
+ ["SCI","பொது அறிவியல்","General Science"],
+ ["GEO","புவியியல்","Geography"],
+ ["HIS","இந்திய வரலாறு & பண்பாடு","History & Culture of India"],
+ ["INM","இந்திய தேசிய இயக்கம்","Indian National Movement"],
+ ["POL","இந்திய ஆட்சியியல்","Indian Polity"],
+ ["ECO","இந்தியப் பொருளாதாரம்","Indian Economy"],
+ ["TNH","தமிழ்நாடு வரலாறு, பண்பாடு & திருக்குறள்","TN History, Culture & Thirukkural"],
+ ["TNA","தமிழ்நாட்டில் வளர்ச்சி நிர்வாகம்","Development Administration in TN"],
+ ["CUR","நடப்பு நிகழ்வுகள்","Current Events"],
+ ["APT","திறனறிவும் மனக்கணக்கும்","Aptitude & Mental Ability"],
+ ["VAD","கிராம நிர்வாகம் (VAO)","Village Administration (VAO)"]
+];
+const UN = Object.fromEntries(UNITS.map(u=>[u[0],u]));
+const BOOKS = {
+ PTA:["Tamil 6–10: every lesson, grammar (இலக்கணம்) sections, poet and author notes","Tamil 11–12: authors, works, titles, கலைச்சொற்கள்","Thirukkural: the prescribed adhikarams in the Tamil books"],
+ SCI:["Science 6–10 (all terms)","Bio-Botany & Bio-Zoology 11–12: cell, human physiology, diseases","Physics/Chemistry 11–12: only units, laws, everyday applications"],
+ GEO:["Social Science 6–10: Geography lessons","Geography 11: physical geography basics","Geography 12: India & Tamil Nadu resources, population, disasters"],
+ HIS:["Social Science 6–10: History lessons","History 11: ancient & medieval India","History 12: Mughals to British rule"],
+ INM:["Social Science 8 & 10: freedom struggle","History 12: national movement chapters"],
+ POL:["Social Science 6–10: Civics lessons","Political Science 11–12: Constitution, Parliament, Judiciary"],
+ ECO:["Social Science 9–10: Economics lessons","Economics 11–12: Indian economy, planning, money & banking"],
+ TNH:["Tamil 6–12: Sangam literature, poets, Thirukkural","Social Science 8–10 & History 11–12: Sangam age, Pallavas, Cholas, social reform, Dravidian movement"],
+ TNA:["Social Science 10 & Economics 12: Tamil Nadu economy","TN Government welfare schemes (last 2 years) and the TN Economic Survey"],
+ CUR:["Last 12 months: TN Govt press releases, PIB, a monthly current-affairs digest"],
+ APT:["Mathematics 6–10: percentage, ratio, LCM/HCF, interest, time & work, area, algebra"],
+ VAD:["Only for VAO aspirants: TN Revenue Standing Orders basics, village accounts, certificates"]
+};
+const ST = {att:{},plan:{},mist:{},lang:"both",hist:[]};
+try{const s=JSON.parse(localStorage.getItem("vetri-g4")||"null"); if(s) Object.assign(ST,s);}catch(e){}
+function save(){try{localStorage.setItem("vetri-g4",JSON.stringify(ST));}catch(e){}}
+let DB=null, EXAMS={}, TEST=null, PRAC=null, timerId=null;
+const app=document.getElementById("app");
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const L="ABCD";
+const qid=q=>q.p+"#"+q.n;
+function paperName(id){const e=EXAMS[id];return e?`${e.exam} ${e.year}${e.part==="A"?" · Part A Tamil":""}`:id;}
+function ansSet(q){return q.a==="ALL"?["A","B","C","D"]:q.a.split("/");}
+function ansText(q){return q.a==="ALL"?"All options accepted":q.a.split("/").map(c=>`(${c}) ${optTxt(q,L.indexOf(c))}`).join(" / ");}
+function optTxt(q,j){const en=q.o[j],ta=q.to&&q.to[j];if(ST.lang==="en"||!ta||ta===en)return en;if(ST.lang==="ta")return ta;return en+" / "+ta;}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];}return a;}
+function ymd(d){return d.toLocaleDateString("en-CA",{timeZone:"Asia/Kolkata"});}
+function today(){return ymd(new Date());}
+
+/* ---------- study plan (built from today’s unit weights) ---------- */
+const LEARN=[["APT",1],["SCI",1],["POL",1],["TNH",1],["SCI",1],["APT",1],["HIS",1],["INM",1],["POL",1],["TNH",1],["GEO",1],["ECO",1],["SCI",1],["APT",1],["TNA",1],["INM",1],["POL",1],["TNH",1],["GEO",1],["HIS",1],["SCI",1],["ECO",1],["APT",1],["TNA",1],["CUR",1],["CUR",1]];
+const REV=[["SCI","POL"],["APT","TNH"],["HIS","INM"],["GEO","ECO"],["TNA","CUR"],["SCI","APT"],["POL","TNH"],["INM","HIS"],["ECO","GEO"],["TNA","CUR"],["SCI","TNH"],["APT","POL"],["HIS","INM"],["GEO","ECO"],["TNA","CUR"],["SCI","APT"],["POL","TNH"]];
+function buildPlan(){
+  const days=[];const start=new Date(PLAN_START+"T12:00:00+05:30");
+  for(let i=0;;i++){const d=new Date(start.getTime()+i*864e5);const k=ymd(d);if(k>="2027-01-10")break;
+    let item;
+    if(i<LEARN.length){const u=LEARN[i][0];item={ph:1,units:[u,"PTA"],title:`Learn: ${UN[u][2]}`,ta:UN[u][1],tasks:[`Read: ${BOOKS[u][0]}`,`Solve 25 previous-year questions on ${UN[u][2]}`,"Part A Tamil: 1 hour of Tamil books + 20 Part A questions","10 aptitude questions"]};}
+    else if(i<LEARN.length+REV.length){const r=REV[i-LEARN.length];item={ph:2,units:r.concat("PTA"),title:`Revise: ${UN[r[0]][2]} + ${UN[r[1]][2]}`,ta:UN[r[0]][1]+" + "+UN[r[1]][1],tasks:["Re-read your notes for both units","Practice 25 questions from each unit","Clear today’s mistakes list","Part A Tamil: 1 hour"].concat(((i-LEARN.length)%3===2)?["Take one model test (Part B or Part A)"]:[])};}
+    else if(k==="2027-01-09"){item={ph:3,units:[],title:"Light revision. Sleep early.",ta:"லேசான மீள்பார்வை · நல்ல உறக்கம்",tasks:["Revise Thirukkural and Tamil grammar notes","Look over the mistakes list once","Check your hall ticket, ID proof, black ball-point pen, exam centre route"]};}
+    else {item={ph:3,units:[],title:"Full mock test + review",ta:"முழு மாதிரித் தேர்வு",tasks:["Full exam mock: Part A + Part B, 200 Q in 3 hours, from 9:30 am like the real exam","Review every wrong answer and its explanation","Part A Tamil: 1 hour","Current affairs: one month’s digest"]};}
+    item.date=k;item.i=i;days.push(item);}
+  return days;
+}
+const PLAN=buildPlan();
+
+/* ---------- stats ---------- */
+function unitStats(){
+  const s={};UNITS.forEach(u=>s[u[0]]={t:0,a:0,c:0});
+  DB.q.forEach(q=>{s[q.u].t++;const r=ST.att[qid(q)];if(r){s[q.u].a++;if(r.c)s[q.u].c++;}});
+  return s;
+}
+function recordAnswer(q,ch){const c=ansSet(q).includes(ch);const k=qid(q);ST.att[k]={c,ch};if(!c)ST.mist[k]=1;else delete ST.mist[k];return c;}
+
+/* ---------- views ---------- */
+function vHome(){
+  const ms=EXAM-Date.now();const d=Math.max(0,Math.floor(ms/864e5)),h=Math.max(0,Math.floor(ms%864e5/36e5)),m=Math.max(0,Math.floor(ms%36e5/6e4));
+  const s=unitStats();let A=0,C=0;Object.values(s).forEach(x=>{A+=x.a;C+=x.c;});
+  const t=today();const td=PLAN.find(p=>p.date===t)||PLAN.find(p=>p.date>t)||PLAN[PLAN.length-1];
+  const doneDays=PLAN.filter(p=>ST.plan[p.date]).length;
+  const weak=UNITS.filter(u=>u[0]!=="VAD"&&s[u[0]].a>=5).map(u=>[u,s[u[0]].c/s[u[0]].a]).sort((a,b)=>a[1]-b[1]).slice(0,3);
+  return `
+  <section class="hero">
+    <div class="sheet stack">
+      <span class="eyebrow">Combined Civil Services Exam – IV</span>
+      <h1>குரூப் 4 தேர்வு · 10 ஜனவரி 2027</h1>
+      <p class="muted" style="margin:0">Sunday, 9:30 am – 12:30 pm · 6,574 posts (tentative). Every question here was asked in a real TNPSC paper, with the answer from the final key and a short explanation.</p>
+      <div class="count" aria-label="Time left to exam"><div><b>${d}</b><span>days</span></div><div><b>${h}</b><span>hours</span></div><div><b>${m}</b><span>minutes</span></div></div>
+      <div class="row"><a class="btn red" href="#plan">Today’s plan</a><a class="btn ghost" href="#mock">Take a mock test</a></div>
+    </div>
+    <div class="sheet stack">
+      <span class="eyebrow">Exam pattern</span>
+      <table class="pattern"><tr><th>Part</th><th>Questions</th><th>Marks</th></tr>
+        <tr><td>A · Tamil Eligibility-cum-Scoring Test (SSLC)</td><td class="num">100</td><td class="num">150</td></tr>
+        <tr><td>B · General Studies (75) + Aptitude & Mental Ability (25)</td><td class="num">100</td><td class="num">150</td></tr>
+        <tr><td><b>Total · 3 hours · OMR</b></td><td class="num"><b>200</b></td><td class="num"><b>300</b></td></tr></table>
+      <p class="note" style="margin:0">Part A needs at least 40% (60 marks) to qualify, and Part A marks count for ranking. No negative marking. Confirm in your hall ticket and the official notification.</p>
+    </div>
+  </section>
+  <section class="grid" style="margin-top:14px">
+    <div class="sheet stat"><span class="eyebrow">Questions done</span><b>${A}<span class="muted" style="font-size:15px"> / ${DB.q.length}</span></b><div class="meter"><i style="width:${A/DB.q.length*100}%"></i></div></div>
+    <div class="sheet stat"><span class="eyebrow">Accuracy</span><b>${A?Math.round(C/A*100):0}%</b><span class="muted" style="font-size:13px">Aim for 80%+ before January</span></div>
+    <div class="sheet stat"><span class="eyebrow">Plan days ticked</span><b>${doneDays}<span class="muted" style="font-size:15px"> / ${PLAN.length}</span></b><div class="meter ok"><i style="width:${doneDays/PLAN.length*100}%"></i></div></div>
+    <div class="sheet stat"><span class="eyebrow">Mistakes to fix</span><b>${Object.keys(ST.mist).length}</b><a href="#mistakes" style="font-size:13px">Practise them again</a></div>
+  </section>
+  <section class="hero" style="margin-top:14px">
+    <div class="sheet stack">
+      <span class="eyebrow">${td.date===t?"Today":"Next"} · ${new Date(td.date+"T12:00:00").toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long"})}</span>
+      <h2>${esc(td.title)}</h2><p class="muted" style="margin:0">${esc(td.ta)}</p>
+      <ul style="margin:0;padding-left:18px">${td.tasks.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+      <div class="chips">${td.units.map(u=>`<a class="chip" href="#practice" data-unit="${u}">Practise ${UN[u][2]}</a>`).join("")}</div>
+    </div>
+    <div class="sheet">
+      <span class="eyebrow">Your accuracy by unit</span>
+      ${UNITS.filter(u=>u[0]!=="VAD").map(u=>{const x=s[u[0]];const p=x.a?Math.round(x.c/x.a*100):0;return `<div class="unitrow"><span>${esc(UN[u[0]][2])}<br><small class="muted">${x.a}/${x.t} done</small></span><div class="meter ${p>=80?"ok":""}"><i style="width:${x.a?p:0}%"></i></div><span class="num">${x.a?p+"%":"–"}</span></div>`}).join("")}
+      ${weak.length?`<p class="note">Weakest now: ${weak.map(w=>esc(w[0][2])).join(", ")}. Give these extra time.</p>`:""}
+    </div>
+  </section>`;
+}
+
+function vPlan(){
+  const t=today();
+  const ph=[["1","Learn each unit","19 Nov – 14 Dec · one unit a day from school books, then its previous-year questions"],["2","Revise and practise","15 Dec – 31 Dec · two units a day, mistakes list, a mock every third day"],["3","Mock tests","1 Jan – 9 Jan · one full mock daily at 9:30 am, then review"]];
+  let out=`<div class="stack"><div><span class="eyebrow">52-day plan to 10 January 2027</span><h1>Study plan</h1><p class="muted">Tick a day when you finish it. About 6 hours a day: 3 for the unit, 1 for Part A Tamil, 1 for questions, 1 for revision.</p></div>`;
+  ph.forEach(([n,h,sub])=>{
+    out+=`<section class="sheet"><div class="phase"><span class="eyebrow">Phase ${n}</span><h2>${h}</h2><p class="muted" style="margin:2px 0 6px">${sub}</p></div>`;
+    PLAN.filter(p=>String(p.ph)===n).forEach(p=>{
+      const done=!!ST.plan[p.date];
+      out+=`<div class="day ${p.date===t?"today":""} ${done?"done":""}"><button class="bub ${done?"fill":""}" data-tick="${p.date}" aria-label="Mark ${p.date} done">${done?"✓":""}</button>
+        <div class="num" style="font-size:13px">${new Date(p.date+"T12:00:00").toLocaleDateString("en-IN",{day:"numeric",month:"short",weekday:"short"})}${p.date===t?'<br><b style="color:var(--omr)">TODAY</b>':""}</div>
+        <div class="dtext" style="min-width:0"><b>${esc(p.title)}</b> <span class="muted">· ${esc(p.ta)}</span><div class="muted" style="font-size:13px">${p.tasks.map(esc).join(" · ")}</div>
+        ${p.units.length?`<div class="chips">${p.units.map(u=>`<a class="chip" href="#practice" data-unit="${u}">Practise ${UN[u][2]}</a>`).join("")}</div>`:""}</div></div>`;
+    });
+    out+=`</section>`;
+  });
+  return out+`</div>`;
+}
+
+function vPractice(){
+  if(PRAC&&PRAC.qs) return vQuiz();
+  const unit=PRAC&&PRAC.unit||"SCI";
+  const tops=DB.topics[unit]||[];
+  return `<div class="stack"><div><span class="eyebrow">Learn mode · answer shows at once</span><h1>Practice by topic</h1><p class="muted">Pick a unit and topic. Each answer shows the correct option, the paper it came from, and why.</p></div>
+  <div class="sheet row" style="align-items:flex-end">
+    <label class="f" style="flex:1 1 220px">Unit<select id="p-unit">${UNITS.map(u=>`<option value="${u[0]}" ${u[0]===unit?"selected":""}>${esc(u[2])} · ${esc(u[1])}</option>`).join("")}</select></label>
+    <label class="f" style="flex:1 1 200px">Topic<select id="p-top"><option value="">All topics</option>${tops.map(t=>`<option>${esc(t)}</option>`).join("")}</select></label>
+    <label class="f">Questions<select id="p-n"><option>10</option><option selected>25</option><option>50</option><option value="999">All</option></select></label>
+    <label class="f">Show<select id="p-only"><option value="new">Not done yet first</option><option value="all">All</option></select></label>
+    <button class="btn red" id="p-go">Start</button>
+  </div>
+  <div class="sheet"><span class="eyebrow">Questions available</span><div class="toplist">${tops.map(t=>{const n=DB.q.filter(q=>q.u===unit&&q.t===t).length;return n?`<span>${esc(t)}</span><span class="num">${n}</span>`:""}).join("")}</div></div></div>`;
+}
+
+function startPractice(qs,label){
+  PRAC={...(PRAC||{}),qs,i:0,label,ok:0,done:0};render();
+}
+function vQuiz(){
+  const P=PRAC;
+  if(P.i>=P.qs.length){
+    return `<div class="sheet stack" style="max-width:640px;margin:0 auto;text-align:center"><span class="eyebrow">${esc(P.label)}</span><div class="score">${P.ok}/${P.qs.length}</div><p class="muted">Correct answers in this set.</p><div class="row" style="justify-content:center"><button class="btn red" data-act="prac-again">New set</button><a class="btn ghost" href="#mistakes">Practise mistakes</a></div></div>`;
+  }
+  const q=P.qs[P.i];const ans=P.ans;
+  return `<div class="stack" style="max-width:760px;margin:0 auto">
+   <div class="row" style="justify-content:space-between"><span class="eyebrow">${esc(P.label)}</span><span class="num">${P.i+1} / ${P.qs.length} · ✓ ${P.ok}</span></div>
+   <div class="meter"><i style="width:${P.i/P.qs.length*100}%"></i></div>
+   ${qCard(q,ans,true)}
+   <div class="row" style="justify-content:space-between"><button class="btn ghost" data-act="prac-exit">Stop</button>${ans?`<button class="btn red" data-act="prac-next">Next question →</button>`:`<button class="btn ghost" data-act="prac-skip">Skip</button>`}</div></div>`;
+}
+function stemHTML(q){
+  const en=`<div class="qtext">${esc(q.q)}</div>`, ta=q.tq?`<div class="qtext ta">${esc(q.tq)}</div>`:"";
+  if(ST.lang==="en"||!ta)return en; if(ST.lang==="ta")return ta.replace('class="qtext ta"','class="qtext ta" style="color:var(--ink);margin:0"'); return en+ta;
+}
+function qCard(q,chosen,reveal){
+  const set=ansSet(q);
+  return `<article class="sheet"><div class="qhead"><span class="qno">Q.${q.n}</span><span class="tag">${esc(paperName(q.p))} · ${esc(UN[q.u][2])} › ${esc(q.t)}</span></div>
+   <div style="margin-top:8px">${stemHTML(q)}</div>
+   <div class="opts">${q.o.map((o,j)=>{const c=L[j];let cls="";
+     if(reveal&&chosen){ if(set.includes(c))cls="right"; else if(c===chosen)cls="wrong"; }
+     else if(c===chosen)cls="sel";
+     return `<button class="opt ${cls}" data-pick="${c}" ${reveal&&chosen?"disabled":""}><span class="b">${c}</span><span class="t">${esc(optTxt(q,j))}</span></button>`}).join("")}</div>
+   ${reveal&&chosen?`<div class="explain"><b>${set.includes(chosen)?'<span class="pill ok">Correct</span>':'<span class="pill bad">Wrong</span>'} விடை / Answer: ${esc(ansText(q))}</b><p style="margin:6px 0 0">${esc(q.x)}</p></div>`:""}
+  </article>`;
+}
+
+/* ---------- mock test ---------- */
+function vMock(){
+  if(TEST&&TEST.done) return vResult();
+  if(TEST) return vTest();
+  const papers=DB.exams.slice().sort((a,b)=>b.year-a.year);
+  return `<div class="stack"><div><span class="eyebrow">Exam mode · answers only at the end</span><h1>Mock tests</h1><p class="muted">The real exam is 200 questions in 3 hours: Part A Tamil (100) and Part B General Studies + Aptitude (100). Each question is 1.5 marks. Fill one bubble per question; results show marks and unit by unit.</p></div>
+  <div class="grid">
+    <div class="sheet stack"><span class="eyebrow">Like the real day</span><h2>Full exam</h2><p class="muted" style="margin:0">100 Part A Tamil + 75 General Studies + 25 Aptitude, all at random from past papers. 300 marks.</p><button class="btn red" data-act="mock-full">Start · 200 Q · 180 min</button></div>
+    <div class="sheet stack"><span class="eyebrow">Part B</span><h2>Model test</h2><p class="muted" style="margin:0">75 General Studies + 25 Aptitude, picked at random across all papers in the same mix as the exam.</p><button class="btn red" data-act="mock-model">Start · 100 Q · 90 min</button></div>
+    <div class="sheet stack"><span class="eyebrow">Part A</span><h2>Tamil model test</h2><p class="muted" style="margin:0">100 பொதுத்தமிழ் questions from the 2022, 2024 and 2025 Part A papers, mixed. You need 60 marks (40) to qualify.</p><button class="btn red" data-act="mock-pta">Start · 100 Q · 90 min</button></div>
+    <div class="sheet stack"><span class="eyebrow">Quick check</span><h2>Mini test</h2><p class="muted" style="margin:0">25 mixed questions (5 Tamil, 15 GS, 5 aptitude) in 22 minutes. Good for a daily warm-up.</p><button class="btn" data-act="mock-mini">Start · 25 Q · 22 min</button></div>
+  </div>
+  <div class="sheet"><span class="eyebrow">Real previous papers</span>
+   <div class="stack" style="margin-top:10px">${papers.map(e=>`<div class="row" style="justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:10px"><div><b>${esc(paperName(e.id))}</b> <span class="muted">· ${esc(e.date)} · ${e.n} questions</span></div><button class="btn ghost" data-paper="${e.id}">Attempt · ${Math.round(e.n*0.9)} min</button></div>`).join("")}</div>
+   <p class="note">The 2012 Group 4, 2013 Group 2, 2017 Group 2/2A, 2025 Group 2/2A, 2026 Group 2/2A and 2026 Group 1 (I-B & I-C) answers follow the ticks printed on the question paper (the final key for these was not available). Questions TNPSC sent to its expert committee are shown as “all options accepted”. Group 2/2A papers are degree standard, a little harder than Group 4, and good extra practice.</p></div>
+  ${ST.hist.length?`<div class="sheet"><span class="eyebrow">Your past tests</span><div class="toplist">${ST.hist.slice(-8).reverse().map(h=>`<span>${esc(h.name)} <small class="muted">${esc(h.when)}</small></span><span class="num">${h.c}/${h.n} · ${h.m} marks</span>`).join("")}</div></div>`:""}
+  </div>`;
+}
+function startTest(qs,name,mins){
+  TEST={qs,name,ans:{},i:0,end:Date.now()+mins*6e4,mins,done:false};
+  clearInterval(timerId);timerId=setInterval(tick,1000);render();
+}
+function tick(){
+  if(!TEST||TEST.done){clearInterval(timerId);return;}
+  const left=TEST.end-Date.now();const el=document.getElementById("tm");
+  if(left<=0){finishTest();return;}
+  if(el){const m=Math.floor(left/6e4),s=Math.floor(left%6e4/1e3);el.textContent=`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;el.classList.toggle("low",left<5*6e4);}
+}
+function vTest(){
+  const T=TEST,q=T.qs[T.i];const n=Object.keys(T.ans).length;
+  return `<div class="stack">
+   <div class="testbar"><span class="timer" id="tm">--:--</span><span class="muted">${esc(T.name)}</span><span class="num" style="margin-left:auto">${n}/${T.qs.length} answered</span><button class="btn red" data-act="test-submit">Submit</button></div>
+   ${qCard(q,T.ans[T.i],false)}
+   <div class="row" style="justify-content:space-between"><button class="btn ghost" data-act="test-prev" ${T.i?"":"disabled"}>← Previous</button><button class="btn" data-act="test-next" ${T.i<T.qs.length-1?"":"disabled"}>Next →</button></div>
+   <div class="sheet"><span class="eyebrow">Answer sheet</span><div class="omr" style="margin-top:8px">${T.qs.map((_,k)=>`<button data-go="${k}" class="${T.ans[k]?"ans":""} ${k===T.i?"cur":""}">${k+1}</button>`).join("")}</div></div>
+   <div id="confirm"></div></div>`;
+}
+function finishTest(){
+  const T=TEST;if(!T||T.done)return;clearInterval(timerId);
+  let c=0;T.qs.forEach((q,k)=>{const ch=T.ans[k];if(ch){if(recordAnswer(q,ch))c++;}});
+  T.done=true;T.c=c;T.marks=(c*1.5).toFixed(1);T.rev=-1;
+  ST.hist.push({name:T.name,n:T.qs.length,c,m:T.marks,when:new Date().toLocaleDateString("en-IN")});save();render();
+}
+function vResult(){
+  const T=TEST;const by={};
+  T.qs.forEach((q,k)=>{by[q.u]=by[q.u]||{t:0,c:0};by[q.u].t++;if(T.ans[k]&&ansSet(q).includes(T.ans[k]))by[q.u].c++;});
+  const att=Object.keys(T.ans).length;const pct=T.c/T.qs.length*100;
+  const showList=T.filter||"wrong";
+  const list=T.qs.map((q,k)=>({q,k,ch:T.ans[k],ok:T.ans[k]&&ansSet(q).includes(T.ans[k])})).filter(x=>showList==="all"||(showList==="wrong"&&!x.ok));
+  return `<div class="stack">
+   <div class="hero"><div class="sheet stack"><span class="eyebrow">${esc(T.name)} · result</span><div class="score">${T.marks}<span class="muted" style="font-size:20px"> / ${(T.qs.length*1.5).toFixed(0)} marks</span></div>
+     <p style="margin:0">${T.c} correct · ${att-T.c} wrong · ${T.qs.length-att} not answered</p>
+     <p class="note" style="margin:0">${pct>=80?"Strong. Keep this up on fresh questions.":pct>=60?"Close. Fix the wrong ones below and retest in two days.":"Go back to the school books for the weak units below, then practise them by topic."}</p>
+     <div class="row"><button class="btn red" data-act="mock-home">Another test</button><a class="btn ghost" href="#mistakes">Practise mistakes</a></div></div>
+   <div class="sheet"><span class="eyebrow">By unit</span>${Object.entries(by).map(([u,x])=>{const p=Math.round(x.c/x.t*100);return `<div class="unitrow"><span>${esc(UN[u][2])}</span><div class="meter ${p>=80?"ok":""}"><i style="width:${p}%"></i></div><span class="num">${x.c}/${x.t}</span></div>`}).join("")}</div></div>
+   <div class="sheet"><span class="eyebrow">Answer sheet</span><div class="omr" style="margin-top:8px">${T.qs.map((q,k)=>{const ch=T.ans[k];const ok=ch&&ansSet(q).includes(ch);return `<button class="${ch?(ok?"r":"w"):""}" data-jump="${k}">${k+1}</button>`}).join("")}</div></div>
+   <div class="row"><span class="eyebrow">Review</span><select id="r-filter"><option value="wrong" ${showList==="wrong"?"selected":""}>Wrong + not answered (${T.qs.length-T.c})</option><option value="all" ${showList==="all"?"selected":""}>All questions</option></select></div>
+   ${list.map(x=>`<div id="rv-${x.k}">${x.ch?qCard(x.q,x.ch,true):qCard(x.q,null,false).replace('</article>',`<div class="explain"><span class="pill skip">Not answered</span> <b>Answer: ${esc(ansText(x.q))}</b><p style="margin:6px 0 0">${esc(x.q.x)}</p></div></article>`).replace(/data-pick=/g,"disabled data-x=")}</div>`).join("")}
+  </div>`;
+}
+
+/* ---------- mistakes, syllabus, books ---------- */
+function vMistakes(){
+  const ks=Object.keys(ST.mist);const qs=DB.q.filter(q=>ST.mist[qid(q)]);
+  const by={};qs.forEach(q=>by[q.u]=(by[q.u]||0)+1);
+  return `<div class="stack"><div><span class="eyebrow">Your weak spots</span><h1>Mistakes list</h1><p class="muted">Every question you got wrong lands here. Answer it right and it leaves the list.</p></div>
+   <div class="sheet stack">${ks.length?`<div class="toplist">${Object.entries(by).map(([u,n])=>`<span>${esc(UN[u][2])}</span><span class="num">${n}</span>`).join("")}</div><div class="row"><button class="btn red" data-act="mist-go">Practise all ${ks.length}</button><button class="btn ghost" data-act="mist-clear-ask">Clear list</button></div><div id="clr"></div>`:`<p style="margin:0">No mistakes saved yet. Take a <a href="#mock">mock test</a> or <a href="#practice">practise a unit</a>; wrong answers will collect here.</p>`}</div></div>`;
+}
+function vSyllabus(){
+  const s=unitStats();
+  return `<div class="stack"><div><span class="eyebrow">Part A Tamil + Part B General Studies & Aptitude</span><h1>Syllabus & how often it is asked</h1><p class="muted">Units as in the Group 4 syllabus. Numbers show how many of our ${DB.q.length} previous-year questions fall under each topic, so you can see where marks come from.</p></div>
+   <div class="sheet">${UNITS.map(u=>{const tops=(DB.topics[u[0]]||[]).map(t=>[t,DB.q.filter(q=>q.u===u[0]&&q.t===t).length]).sort((a,b)=>b[1]-a[1]);
+     return `<details class="unit"><summary><span>${esc(u[2])} <span class="muted" style="font-weight:400">· ${esc(u[1])}</span></span><span class="num">${s[u[0]].t} Q</span></summary>
+       <div class="toplist">${tops.map(([t,n])=>`<span>${esc(t)}</span><span class="num">${n}</span>`).join("")}</div>
+       <p class="note">Read: ${BOOKS[u[0]].map(esc).join(" · ")}</p>
+       <a class="chip" href="#practice" data-unit="${u[0]}">Practise this unit</a></details>`}).join("")}
+   </div></div>`;
+}
+function vBooks(){
+  const rows=UNITS.map(u=>`<tr><td><b>${esc(u[2])}</b><br><span class="muted">${esc(u[1])}</span></td><td>${BOOKS[u[0]].map(esc).join("<br>")}</td></tr>`).join("");
+  return `<div class="stack"><div><span class="eyebrow">Samacheer Kalvi · 6th to 12th standard</span><h1>School books: what to read</h1><p class="muted">Group 4 questions come mostly from Tamil Nadu state board books. Read the new-syllabus books, both Tamil and English medium are fine.</p></div>
+   <div class="sheet row"><a class="btn red" href="https://www.textbooksonline.tn.nic.in/" target="_blank" rel="noopener">Download textbooks (TN Govt site)</a><a class="btn ghost" href="https://www.tnpsc.gov.in/" target="_blank" rel="noopener">TNPSC official site</a></div>
+   <div class="sheet tbl"><table class="books"><tr><th>Unit</th><th>Books and parts to read</th></tr>
+${rows}</table></div>
+   <div class="sheet stack"><h3>How to read a book for TNPSC</h3><ul style="margin:0;padding-left:18px"><li>Read the lesson once fully. On the second read, underline names, years, places, firsts and lists.</li><li>Do the book’s own one-mark questions at the end of each lesson.</li><li>Straight after, practise that unit’s previous-year questions here to see how TNPSC asks it.</li><li>Keep one notebook per unit for facts you got wrong.</li></ul></div></div>`;
+}
+
+/* ---------- router ---------- */
+function route(){return (location.hash||"#home").slice(1)||"home";}
+function render(){
+  const r=route();document.querySelectorAll("#tabs a").forEach(a=>a.classList.toggle("on",a.dataset.r===r));
+  document.querySelectorAll(".lang button").forEach(b=>b.classList.toggle("on",b.dataset.l===ST.lang));
+  if(!DB)return;
+  const V={home:vHome,plan:vPlan,practice:vPractice,mock:vMock,mistakes:vMistakes,syllabus:vSyllabus,books:vBooks}[r]||vHome;
+  app.innerHTML=V();if(r==="mock"&&TEST&&!TEST.done)tick();
+}
+window.addEventListener("hashchange",()=>{render();window.scrollTo(0,0);});
+document.querySelectorAll(".lang button").forEach(b=>b.addEventListener("click",()=>{ST.lang=b.dataset.l;save();render();}));
+
+function pickN(arr,n){return shuffle(arr).slice(0,n);}
+document.addEventListener("click",e=>{
+  const t=e.target.closest("[data-pick],[data-act],[data-tick],[data-go],[data-jump],[data-paper],[data-unit]");if(!t)return;
+  if(t.dataset.unit!==undefined){PRAC={unit:t.dataset.unit};if(route()==="practice"){render();window.scrollTo(0,0);}return;}
+  if(t.dataset.tick){const k=t.dataset.tick;if(ST.plan[k])delete ST.plan[k];else ST.plan[k]=1;save();render();return;}
+  if(t.dataset.pick){
+    const c=t.dataset.pick;
+    if(route()==="mock"&&TEST&&!TEST.done){TEST.ans[TEST.i]=c;render();return;}
+    if(PRAC&&PRAC.qs&&!PRAC.ans){const q=PRAC.qs[PRAC.i];PRAC.ans=c;if(recordAnswer(q,c))PRAC.ok++;save();render();return;}
+    if(route()==="mistakes"||route()==="practice"){return;}
+  }
+  if(t.dataset.go){TEST.i=+t.dataset.go;render();return;}
+  if(t.dataset.jump){const el=document.getElementById("rv-"+t.dataset.jump);if(el)el.scrollIntoView({behavior:"smooth",block:"start"});else{TEST.filter="all";render();setTimeout(()=>{const x=document.getElementById("rv-"+t.dataset.jump);x&&x.scrollIntoView();},30);}return;}
+  if(t.dataset.paper){const id=t.dataset.paper;const qs=DB.q.filter(q=>q.p===id).sort((a,b)=>a.n-b.n);startTest(qs,paperName(id)+" paper",Math.round(qs.length*0.9));return;}
+  const a=t.dataset.act;
+  if(a==="prac-next"||a==="prac-skip"){PRAC.i++;PRAC.ans=null;render();window.scrollTo(0,0);}
+  else if(a==="prac-exit"||a==="prac-again"){PRAC={unit:PRAC.unit};render();}
+  else if(a==="mock-model"){const gs=DB.q.filter(q=>q.u!=="APT"&&q.u!=="VAD"&&q.u!=="PTA"),ap=DB.q.filter(q=>q.u==="APT");startTest(shuffle(pickN(gs,75).concat(pickN(ap,25))),"Model test",90);}
+  else if(a==="mock-mini"){const gs=DB.q.filter(q=>q.u!=="APT"&&q.u!=="VAD"&&q.u!=="PTA"),ap=DB.q.filter(q=>q.u==="APT"),ta=DB.q.filter(q=>q.u==="PTA");startTest(shuffle(pickN(ta,5).concat(pickN(gs,15),pickN(ap,5))),"Mini test",22);}
+  else if(a==="mock-pta"){startTest(pickN(DB.q.filter(q=>q.u==="PTA"),100),"Part A Tamil model test",90);}
+  else if(a==="mock-full"){const gs=DB.q.filter(q=>q.u!=="APT"&&q.u!=="VAD"&&q.u!=="PTA"),ap=DB.q.filter(q=>q.u==="APT"),ta=DB.q.filter(q=>q.u==="PTA");startTest(pickN(ta,100).concat(shuffle(pickN(gs,75).concat(pickN(ap,25)))),"Full exam (Part A + B)",180);}
+  else if(a==="test-next"){TEST.i++;render();}
+  else if(a==="test-prev"){TEST.i--;render();}
+  else if(a==="test-submit"){const n=TEST.qs.length-Object.keys(TEST.ans).length;const c=document.getElementById("confirm");c.innerHTML=`<div class="sheet row" style="border-color:var(--omr)"><span>${n?`${n} questions are not answered. `:""}Submit now?</span><button class="btn red" data-act="test-final">Yes, submit</button><button class="btn ghost" data-act="test-keep">Keep going</button></div>`;c.scrollIntoView({behavior:"smooth"});}
+  else if(a==="test-final"){finishTest();window.scrollTo(0,0);}
+  else if(a==="test-keep"){document.getElementById("confirm").innerHTML="";}
+  else if(a==="mock-home"){TEST=null;render();window.scrollTo(0,0);}
+  else if(a==="mist-go"){const qs=shuffle(DB.q.filter(q=>ST.mist[qid(q)]));PRAC={unit:"SCI"};location.hash="#practice";startPractice(qs,"Mistakes list");}
+  else if(a==="mist-clear-ask"){document.getElementById("clr").innerHTML=`<div class="row"><span>Remove all saved mistakes?</span><button class="btn red" data-act="mist-clear">Yes, clear</button></div>`;}
+  else if(a==="mist-clear"){ST.mist={};save();render();}
+});
+document.addEventListener("change",e=>{
+  if(e.target.id==="p-unit"){PRAC={unit:e.target.value};render();}
+  if(e.target.id==="r-filter"){TEST.filter=e.target.value;render();}
+});
+document.addEventListener("click",e=>{
+  if(e.target.id!=="p-go")return;
+  const u=document.getElementById("p-unit").value,tp=document.getElementById("p-top").value,n=+document.getElementById("p-n").value,only=document.getElementById("p-only").value;
+  let pool=DB.q.filter(q=>q.u===u&&(!tp||q.t===tp));pool=shuffle(pool);
+  if(only==="new")pool.sort((a,b)=>(ST.att[qid(a)]?1:0)-(ST.att[qid(b)]?1:0));
+  PRAC={unit:u};startPractice(pool.slice(0,n),`${UN[u][2]}${tp?" › "+tp:""}`);
+});
+setInterval(()=>{if(route()==="home"&&!document.hidden)render();},60000);
+
+render();
+fetch("questions.json").then(r=>r.json()).then(d=>{DB=d;d.exams.forEach(e=>EXAMS[e.id]=e);render();})
+ .catch(()=>{app.innerHTML='<div class="sheet"><h2>Questions could not load</h2><p class="muted">Check your connection and reload the page.</p></div>';});
+})();
+</script>
